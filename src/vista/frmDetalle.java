@@ -109,7 +109,8 @@ public class frmDetalle extends javax.swing.JFrame {
         lblEst = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setExtendedState(MAXIMIZED_BOTH);
+        setMinimumSize(new java.awt.Dimension(819, 535));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -126,7 +127,7 @@ public class frmDetalle extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblDetalle);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(90, 270, 640, 160);
+        jScrollPane1.setBounds(90, 270, 640, 200);
 
         lblNumPed.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNumPed.setText("N° Pedido:");
@@ -140,7 +141,7 @@ public class frmDetalle extends javax.swing.JFrame {
 
         btnReg.setText("Regresar");
         jPanel1.add(btnReg);
-        btnReg.setBounds(10, 11, 77, 23);
+        btnReg.setBounds(10, 11, 100, 23);
 
         lblNomCli.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNomCli.setText("Nombre cliente:");
@@ -155,7 +156,7 @@ public class frmDetalle extends javax.swing.JFrame {
         cboEst.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Aprobado", "Pendiente", "Cancelado" }));
         cboEst.setEnabled(false);
         jPanel1.add(cboEst);
-        cboEst.setBounds(184, 184, 87, 20);
+        cboEst.setBounds(184, 184, 120, 20);
 
         lblValPed.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblValPed.setText("Valor total:");
@@ -169,7 +170,7 @@ public class frmDetalle extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnMod);
-        btnMod.setBounds(520, 220, 75, 23);
+        btnMod.setBounds(505, 220, 90, 23);
 
         btnGua.setText("Guardar");
         btnGua.addActionListener(new java.awt.event.ActionListener() {
@@ -178,7 +179,7 @@ public class frmDetalle extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnGua);
-        btnGua.setBounds(620, 220, 71, 23);
+        btnGua.setBounds(620, 220, 90, 23);
 
         lblEst.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblEst.setText("Estado:");

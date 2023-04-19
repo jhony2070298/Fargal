@@ -66,11 +66,6 @@ public class frmDetalle extends javax.swing.JFrame {
         */
     }
     
-    public void modificarEstado(){
-        cboEst.setEnabled(true);
-        btnGua.setEnabled(true);
-    }
-    
     public void editarEstado(){
         /**
         if (cboEst.getSelectedIndex()== 0) {
@@ -105,7 +100,6 @@ public class frmDetalle extends javax.swing.JFrame {
         cboEst = new javax.swing.JComboBox<>();
         lblValPed = new javax.swing.JLabel();
         btnMod = new javax.swing.JButton();
-        btnGua = new javax.swing.JButton();
         lblEst = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -141,7 +135,7 @@ public class frmDetalle extends javax.swing.JFrame {
 
         btnReg.setText("Regresar");
         jPanel1.add(btnReg);
-        btnReg.setBounds(10, 11, 100, 23);
+        btnReg.setBounds(700, 20, 90, 23);
 
         lblNomCli.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNomCli.setText("Nombre cliente:");
@@ -170,16 +164,7 @@ public class frmDetalle extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnMod);
-        btnMod.setBounds(505, 220, 90, 23);
-
-        btnGua.setText("Guardar");
-        btnGua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnGua);
-        btnGua.setBounds(620, 220, 90, 23);
+        btnMod.setBounds(640, 220, 90, 23);
 
         lblEst.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblEst.setText("Estado:");
@@ -193,12 +178,8 @@ public class frmDetalle extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModActionPerformed
-    this.modificarEstado();    // TODO add your handling code here:
+    this.editarEstado();// TODO add your handling code here:
     }//GEN-LAST:event_btnModActionPerformed
-
-    private void btnGuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuaActionPerformed
-    this.editarEstado();        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,7 +217,6 @@ public class frmDetalle extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGua;
     private javax.swing.JButton btnMod;
     private javax.swing.JButton btnReg;
     private javax.swing.JComboBox<String> cboEst;

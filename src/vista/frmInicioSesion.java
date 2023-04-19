@@ -5,6 +5,8 @@
  */
 package vista;
 
+import controlador.clsConexion;
+
 /**
  *
  * @author Sena CSET
@@ -16,7 +18,9 @@ public class frmInicioSesion extends javax.swing.JFrame {
      */
     public frmInicioSesion() {
         initComponents();
+       
     }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.

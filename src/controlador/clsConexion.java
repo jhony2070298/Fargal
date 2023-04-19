@@ -23,7 +23,7 @@ public class clsConexion {
   public PreparedStatement sql;
   
   public void conectar(){
-      String db ="jdbc:driver://skytech.czgp6nomvwxi.us-east-2.rds.amazonaws.com:3306/udemy_delivery";
+      String db ="jdbc:mysql://skytech.czgp6nomvwxi.us-east-2.rds.amazonaws.com:3306/udemy_delivery";
       String usuario ="admin";
       String password ="123456xx";
       

@@ -74,9 +74,7 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
           }
     }
     
-    public boolean isCellEditable(int rowIndex, int vColIndex) {
-            return false;
-        }
+  
     public void limpiar(){
     cboMarca.setSelectedItem(0);
     cboProducto.setSelectedItem(0);

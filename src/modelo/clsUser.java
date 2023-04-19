@@ -65,7 +65,8 @@ public class clsUser {
             conexion.sql.executeQuery();
 
             datos = conexion.sql.getResultSet();
-            
+
+            System.out.println(datos);
             System.out.println(datos);
              
        } catch (SQLException ex) {

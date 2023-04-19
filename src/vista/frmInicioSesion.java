@@ -6,6 +6,7 @@
 package vista;
 
 import controlador.clsConexion;
+import modelo.clsUser;
 
 /**
  *
@@ -21,6 +22,20 @@ public class frmInicioSesion extends javax.swing.JFrame {
        
     }
    
+    public void login(){
+      clsUser user = new clsUser();
+        user.login();
+    }
+    //   if (a<0){ 
+
+    //         JOptionPane.showMessageDialog(null, 
+    //         "Debe seleccionar una fila de la tabla" ); 
+
+    //  }else {
+    //         JOptionPane.showMessageDialog(null,"Registro Eliminado" );
+    //          tabladatos.removeRow(a); 
+    //   }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,7 +60,7 @@ public class frmInicioSesion extends javax.swing.JFrame {
 
         jLabel2.setText("Usuario :");
 
-        jLabel3.setText("Contrseña :");
+        jLabel3.setText("Contraseña :");
 
         btnIngresar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnIngresar.setText("Ingresar");

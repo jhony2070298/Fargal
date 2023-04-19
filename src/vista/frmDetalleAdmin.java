@@ -1,8 +1,10 @@
 package vista;
 
+import controlador.clsConexion;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.clsDetalle;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,17 +17,22 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Sena CSET
  */
-public class frmDetalle extends javax.swing.JFrame {
+public class frmDetalleAdmin extends javax.swing.JFrame {
 
     /**
      * Creates new form frmDetalle
      */
-    public frmDetalle() {
+    public frmDetalleAdmin() {
         initComponents();    
         this.setLocationRelativeTo(null);
+        creartabla();
+        llenarDetalle();
+        llenarTablaDetalle();
     }
     
     DefaultTableModel tabladatos;
+    clsConexion objCon = new clsConexion();
+    clsDetalle objDet = new clsDetalle();
     
     public void creartabla() {
         Object modelodata[][] = new Object[0][0];
@@ -42,41 +49,48 @@ public class frmDetalle extends javax.swing.JFrame {
         }
     }
     
-    public void llenartabla(){
-        /**
+    public void llenarDetalle(){
+        try {
+//                borrartabla();
+                objDet.llenarDatosDetalle();
+                while (objDet.datos.next() == true) {
+                    lblNumPed.setText(lblNumPed.getText()+"   " +objDet.datos.getString(1));
+                    lblFec.setText(lblFec.getText()+"   " +objDet.datos.getString(2));
+                    lblNomCli.setText(lblNomCli.getText()+"   " +objDet.datos.getString(3));
+                    lblNomVen.setText(lblNomVen.getText()+"   " +objDet.datos.getString(4));
+                    cboEst.setSelectedItem(objDet.datos.getString(5));
+                    lblValPed.setText(lblValPed.getText()+"   "+objDet.datos.getString(6));
+                }
+            } catch (SQLException ex) {
+                System.out.println("error al llenar la tabla" + ex);
+            }
+    }
+    public void llenarTablaDetalle(){
         try {
                 borrartabla();
-                obj.set();
-                obj.buscar();
-                while (obj.datos.next() == true) {
-                    lblNumPed.setText(lblNumPed.getText()+"  " +obj.datos.getString(1));
-                    lblFec.setText(lblFec.getText()+"  " +obj.datos.getString(2));
-                    lblNomCli.setText(lblNomCli.getText()+"  " +obj.datos.getString(3));
-                    lblEst.setText(lblEst.getText()+"  " +obj.datos.getString(4));
-                    lblValPed.setText(lblValPed.getText()+"  "+obj.datos.getString(5));
-                    String Producto = obj.datos.getString(6);
-                    String Cantidad = obj.datos.getString(7);
-                    String ValorProductos = obj.datos.getString(8);
+                objDet.llenarTablaDetalle();
+                while (objDet.datos.next() == true) {
+                    String Producto = objDet.datos.getString(1);
+                    String Cantidad = objDet.datos.getString(2);
+                    String ValorProductos = objDet.datos.getString(3);
                     Object fila[] = {Producto,Cantidad, ValorProductos};
                     tabladatos.addRow(fila);
                 }
             } catch (SQLException ex) {
                 System.out.println("error al llenar la tabla" + ex);
             }
-        */
     }
+
     
     public void editarEstado(){
-        /**
         if (cboEst.getSelectedIndex()== 0) {
                 cboEst.grabFocus();
                 JOptionPane.showMessageDialog(null, "Debe seleccionar el nuevo estado que quiere asignar al pedido");
             }
         else {
-            obj.setEstado((String) cboEst.getSelectedItem());
-            obj.metodo();
+            objDet.setEstado((String) cboEst.getSelectedItem());
+            objDet.editarEstado();
         }
-        */
     }
     
 
@@ -95,15 +109,17 @@ public class frmDetalle extends javax.swing.JFrame {
         lblNumPed = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnReg = new javax.swing.JButton();
-        lblNomCli = new javax.swing.JLabel();
+        lblNomVen = new javax.swing.JLabel();
         lblFec = new javax.swing.JLabel();
         cboEst = new javax.swing.JComboBox<>();
         lblValPed = new javax.swing.JLabel();
         btnMod = new javax.swing.JButton();
         lblEst = new javax.swing.JLabel();
+        lblNomCli = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(819, 535));
+        setTitle("Detalle de pedido");
+        setMinimumSize(new java.awt.Dimension(896, 626));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -121,41 +137,40 @@ public class frmDetalle extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblDetalle);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(90, 270, 640, 200);
+        jScrollPane1.setBounds(130, 310, 640, 190);
 
         lblNumPed.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblNumPed.setText("N° Pedido:");
         jPanel1.add(lblNumPed);
-        lblNumPed.setBounds(100, 99, 66, 17);
+        lblNumPed.setBounds(90, 90, 320, 17);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Detalle del pedido");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(70, 52, 141, 22);
+        jLabel2.setBounds(60, 40, 141, 22);
 
         btnReg.setText("Regresar");
         jPanel1.add(btnReg);
-        btnReg.setBounds(700, 20, 90, 23);
+        btnReg.setBounds(760, 20, 90, 23);
 
-        lblNomCli.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNomCli.setText("Nombre cliente:");
-        jPanel1.add(lblNomCli);
-        lblNomCli.setBounds(70, 155, 96, 17);
+        lblNomVen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblNomVen.setText("Nombre vendedor:");
+        jPanel1.add(lblNomVen);
+        lblNomVen.setBounds(40, 180, 320, 17);
 
         lblFec.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblFec.setText("Fecha:");
+        lblFec.setText(" Fecha:");
         jPanel1.add(lblFec);
-        lblFec.setBounds(125, 127, 41, 17);
+        lblFec.setBounds(110, 120, 210, 17);
 
-        cboEst.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Aprobado", "Pendiente", "Cancelado" }));
-        cboEst.setEnabled(false);
+        cboEst.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "APROBADO", "PENDIENTE", "CANCELADO" }));
         jPanel1.add(cboEst);
-        cboEst.setBounds(184, 184, 120, 20);
+        cboEst.setBounds(170, 210, 120, 20);
 
         lblValPed.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblValPed.setText("Valor total:");
         jPanel1.add(lblValPed);
-        lblValPed.setBounds(100, 220, 70, 17);
+        lblValPed.setBounds(90, 240, 270, 17);
 
         btnMod.setText("Modificar");
         btnMod.addActionListener(new java.awt.event.ActionListener() {
@@ -164,15 +179,20 @@ public class frmDetalle extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnMod);
-        btnMod.setBounds(640, 220, 90, 23);
+        btnMod.setBounds(680, 230, 90, 23);
 
         lblEst.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblEst.setText("Estado:");
         jPanel1.add(lblEst);
-        lblEst.setBounds(119, 184, 47, 17);
+        lblEst.setBounds(110, 210, 47, 17);
+
+        lblNomCli.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblNomCli.setText("Nombre cliente:");
+        jPanel1.add(lblNomCli);
+        lblNomCli.setBounds(60, 150, 320, 17);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 820, 540);
+        jPanel1.setBounds(0, 0, 900, 580);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -198,20 +218,21 @@ public class frmDetalle extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmDetalle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmDetalleAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmDetalle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmDetalleAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmDetalle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmDetalleAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmDetalle.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmDetalleAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmDetalle().setVisible(true);
+                new frmDetalleAdmin().setVisible(true);
             }
         });
     }
@@ -226,6 +247,7 @@ public class frmDetalle extends javax.swing.JFrame {
     private javax.swing.JLabel lblEst;
     private javax.swing.JLabel lblFec;
     private javax.swing.JLabel lblNomCli;
+    private javax.swing.JLabel lblNomVen;
     private javax.swing.JLabel lblNumPed;
     private javax.swing.JLabel lblValPed;
     private javax.swing.JTable tblDetalle;

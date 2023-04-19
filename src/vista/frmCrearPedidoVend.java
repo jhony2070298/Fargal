@@ -20,17 +20,23 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
     public frmCrearPedidoVend() {
         initComponents();
         this.creartabla();
+    
     }
     
     DefaultTableModel tabladatos;
-    
-    
-    public void llamarRegresar(){
    
+     public boolean isCellEditable(int rowIndex, int vColIndex) {
+            return false;
+        }
+     
+    public void llamarRegresar(){
+    frmInicioVendedor objIn = new  frmInicioVendedor();
+    objIn.setVisible(true);
+    this.setVisible(false);
     }
    public void creartabla() {
         Object modelodata[][] = new Object[0][0];
-        Object modelotitulos[] = {"Producto", "Cantidad", "Precio Unitario", "Precio Total"};
+        Object modelotitulos[] = {"N° Producto","Producto", "Cantidad", "Precio Unitario", "Precio Total"};
         tabladatos = new DefaultTableModel();
         tabladatos = new DefaultTableModel(modelodata, modelotitulos);
 
@@ -45,11 +51,12 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
     }
     
     public void agregarFila(){ 
-            Object [] fila=new Object[4]; 
-              fila[0]=cboProducto.getSelectedItem().toString();
-              fila[1]=spnCantidad.getValue().toString();
-              fila[2]="bd";
+            Object [] fila=new Object[5]; 
+              fila[0]="n bd";
+              fila[1]=cboProducto.getSelectedItem().toString();
+              fila[2]=spnCantidad.getValue().toString();
               fila[3]="bd";
+              fila[4]="bd";
               tabladatos.addRow(fila); 
              //combinar metodo llenar tabla para traer los precios
     }
@@ -67,6 +74,9 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
           }
     }
     
+    public boolean isCellEditable(int rowIndex, int vColIndex) {
+            return false;
+        }
     public void limpiar(){
     cboMarca.setSelectedItem(0);
     cboProducto.setSelectedItem(0);
@@ -99,6 +109,9 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
         spnCantidad = new javax.swing.JSpinner();
         btnRegresar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        lblNumeroPedido = new javax.swing.JLabel();
+        btnEliminar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,17 +144,17 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
 
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Producto", "Cantidad", "Precio Unidad", "Precio total"
+                "N° Producto", "Producto", "Cantidad", "Precio Unidad", "Precio total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -171,22 +184,32 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setText("N° Pedido :");
+
+        btnEliminar1.setText("editar");
+        btnEliminar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(jLabel3))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(46, 46, 46)
                                 .addComponent(jLabel2)
                                 .addGap(31, 31, 31)
-                                .addComponent(cboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(179, 179, 179)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblNumeroPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(212, 212, 212)
                                 .addComponent(jLabel4)
@@ -203,7 +226,10 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(jLabel3)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -211,7 +237,9 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
                         .addGap(160, 160, 160)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                        .addComponent(btnEliminar))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(385, 385, 385)
                         .addComponent(jLabel1)
@@ -233,7 +261,10 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(cboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cboCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel8)
+                                .addComponent(lblNumeroPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(38, 38, 38)
                         .addComponent(jLabel3))
                     .addComponent(btnRegresar))
@@ -257,7 +288,9 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(108, 108, 108)
-                        .addComponent(btnEliminar)))
+                        .addComponent(btnEliminar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
@@ -278,6 +311,10 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
     this.borrarFila(); 
     this.limpiar();
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,6 +354,7 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAñadir;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnEliminar1;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cboCliente;
@@ -329,7 +367,9 @@ public class frmCrearPedidoVend extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblNumeroPedido;
     private javax.swing.JSpinner spnCantidad;
     private javax.swing.JTable tblProductos;
     // End of variables declaration//GEN-END:variables

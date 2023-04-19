@@ -24,7 +24,9 @@ public class frmVerPedidosVend extends javax.swing.JFrame {
      DefaultTableModel tabladatos;
     
     public void llamarRegresar(){
-    
+    frmInicioVendedor objIn = new  frmInicioVendedor();
+    objIn.setVisible(true);
+    this.setVisible(false);
     }
 
      public void creartabla() {
